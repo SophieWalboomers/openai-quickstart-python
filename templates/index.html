@@ -3,19 +3,49 @@
   <title>OpenAI Quickstart</title>
   <link
     rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
+    href="{{ url_for('static', filename='icon.png') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
+  <img src="{{ url_for('static', filename='icon.png') }}" class="icon" />
+  <h3>Solo backpacking travel guide</h3>
   <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
+    <input type="text" name="country" placeholder="Enter a country" required />
+      <input type="text" name="days" placeholder="Enter duration (days)" required />
+      <input type="text" name="budget_accomodation" placeholder="Accomodation budget per day (USD)" required />
+      <input type="text" name="budget_activities" placeholder="Activities budget per day (USD)" required />
+      <label for="hotel_requirements">Only hotels with 3 stars or more: <input type="checkbox" id="hotel_requirements", name="reqs", value="hotel_requirements"></label>
+      <label for="restaurant_budget">Recommend places to eat on a budget: <input type="checkbox" id="restaurant_budget", name="reqs", value="restaurant_budget"></label>
+      <label for="restaurant_best">Recommend best places to eat: <input type="checkbox" id="restaurant_best", name="reqs", value="restaurant_best"></label>
+      <label for="car">I have a car: <input type="checkbox" id="car", name="reqs", value="car"></label>
+    <input type="submit" value="Plan my adventure!" />
   </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
+
+  <div id="wrapper">
+      {% if text %}
+          {% if title %}
+              <div id = "text">
+                  <h4> {{ title }} </h4>
+                  <p>{{text|safe}}</p>
+              </div>
+          {%  endif %}
+      {% endif %}
+
+      {% if table %}
+        <div id = "table">
+            <h4> Itinerary </h4>
+            {{table|safe}}
+        </div>
+      {% endif %}
+
+      {% if packing_list %}
+        <div id = "packing_list">
+            <h4> Packing </h4>
+            {{ packing_list|safe }}
+        </div>
+      {% endif %}
+  </div>
+
 </body>
